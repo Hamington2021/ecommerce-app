@@ -65,9 +65,9 @@ function ProductDetail() {
         </Link>
       </header>
 
-      <div className="product-detail">
-        <div className="product-images">
-          <div className="main-image">
+      <main className="product-detail-container">
+        <section className="product-images-section">
+          <div className="main-image-wrapper">
             <img
               src={product.images[selectedImage]}
               alt={product.title}
@@ -94,12 +94,14 @@ function ProductDetail() {
               ))}
             </div>
           )}
-        </div>
+        </section>
 
-        <div className="product-info-detail">
-          <h1>{product.title}</h1>
-          <p className="brand">Brand: {product.brand || "N/A"}</p>
-          <p className="category-badge">{product.category}</p>
+        <section className="product-info-section">
+          <h1 className="product-title">{product.title}</h1>
+          <div className="brand-category-row">
+            <span className="brand">Brand: {product.brand || "N/A"}</span>
+            <span className="category-badge">{product.category}</span>
+          </div>
 
           <div className="rating-section">
             <RatingStars rating={averageRating} />
@@ -153,13 +155,14 @@ function ProductDetail() {
           {cartMessage && (
             <span className="cart-message-large">{cartMessage}</span>
           )}
-        </div>
-      </div>
+        </section>
+      </main>
 
-      <div className="reviews-section">
+      <section className="reviews-section">
+        <h2 className="reviews-title">User Reviews</h2>
         <ReviewList apiReviews={apiReviews} userReviews={userReviews} />
         <ReviewForm productId={id} onReviewSubmit={handleReviewSubmit} />
-      </div>
+      </section>
 
       <Footer />
     </div>
