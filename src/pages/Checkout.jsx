@@ -94,20 +94,20 @@ function Checkout() {
 
     // Validate payment method specific fields
     if (formData.paymentMethod === "credit-card") {
-      if (!formData.cardNumber || !formData.expiryDate || !formData.cvv) {
+      if (!(formData.cardNumber && formData.cardNumber.trim()) || !(formData.expiryDate && formData.expiryDate.trim()) || !(formData.cvv && formData.cvv.trim())) {
         alert("Please fill in all credit card fields");
         return;
       }
     } else if (formData.paymentMethod === "paypal") {
-      if (!formData.paypalEmail) {
+      if (!(formData.paypalEmail && formData.paypalEmail.trim())) {
         alert("Please enter your PayPal email");
         return;
       }
     } else if (formData.paymentMethod === "bank-transfer") {
       if (
-        !formData.bankAccountHolder ||
-        !formData.bankAccountNumber ||
-        !formData.bankRoutingNumber
+        !(formData.bankAccountHolder && formData.bankAccountHolder.trim()) ||
+        !(formData.bankAccountNumber && formData.bankAccountNumber.trim()) ||
+        !(formData.bankRoutingNumber && formData.bankRoutingNumber.trim())
       ) {
         alert("Please fill in all bank transfer fields");
         return;
@@ -269,7 +269,6 @@ function Checkout() {
                     value={formData.cardNumber}
                     onChange={handleInputChange}
                     maxLength="16"
-                    required
                   />
                 </div>
                 <div className="form-row-group">
@@ -280,7 +279,6 @@ function Checkout() {
                     value={formData.expiryDate}
                     onChange={handleInputChange}
                     maxLength="5"
-                    required
                   />
                   <input
                     type="text"
@@ -289,7 +287,6 @@ function Checkout() {
                     value={formData.cvv}
                     onChange={handleInputChange}
                     maxLength="3"
-                    required
                   />
                 </div>
               </>
@@ -298,12 +295,11 @@ function Checkout() {
             {formData.paymentMethod === "paypal" && (
               <div className="form-row">
                 <input
-                  type="email"
+                  type="text"
                   name="paypalEmail"
                   placeholder="PayPal Email Address"
                   value={formData.paypalEmail}
                   onChange={handleInputChange}
-                  required
                 />
               </div>
             )}
@@ -317,7 +313,6 @@ function Checkout() {
                     placeholder="Account Holder Name"
                     value={formData.bankAccountHolder}
                     onChange={handleInputChange}
-                    required
                   />
                 </div>
                 <div className="form-row">
@@ -327,7 +322,6 @@ function Checkout() {
                     placeholder="Account Number"
                     value={formData.bankAccountNumber}
                     onChange={handleInputChange}
-                    required
                   />
                 </div>
                 <div className="form-row">
@@ -337,7 +331,6 @@ function Checkout() {
                     placeholder="Routing Number"
                     value={formData.bankRoutingNumber}
                     onChange={handleInputChange}
-                    required
                   />
                 </div>
               </>

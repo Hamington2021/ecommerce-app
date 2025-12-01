@@ -20,20 +20,26 @@ function OrderConfirmation() {
   }
 
   // Calculate GST and QST if not present in orderData.totals
-  const subtotal = orderData.totals.subtotal;
-  const province = orderData.customerInfo.state;
+  const subtotal = orderData.totals?.subtotal || 0;
+  const province = orderData.customerInfo?.state || "";
   const GST_RATE = 0.05;
   const QST_RATE = 0.09975;
   const gst =
-    orderData.totals.gst !== undefined
+    orderData.totals?.gst !== undefined
       ? orderData.totals.gst
       : subtotal * GST_RATE;
+  const pst = orderData.totals?.pst || 0;
+  const rst = orderData.totals?.rst || 0;
+  const hst = orderData.totals?.hst || 0;
   const qst =
     province === "Quebec"
-      ? orderData.totals.qst !== undefined
+      ? orderData.totals?.qst !== undefined
         ? orderData.totals.qst
         : subtotal * QST_RATE
       : 0;
+  const tax = orderData.totals?.tax || (gst + pst + rst + hst + qst);
+  const shipping = orderData.totals?.shipping || 0;
+  const total = orderData.totals?.total || (subtotal + tax);
 
   return (
     <div className="order-confirmation-page">
@@ -92,29 +98,45 @@ function OrderConfirmation() {
           <div className="order-totals">
             <div className="total-row">
               <span>Subtotal:</span>
-              <span>${orderData.totals.subtotal.toFixed(2)}</span>
+              <span>${subtotal.toFixed(2)}</span>
             </div>
             <div className="total-row">
               <span>GST (5%):</span>
               <span>${gst.toFixed(2)}</span>
             </div>
+            {pst > 0 && (
+              <div className="total-row">
+                <span>PST (7%):</span>
+                <span>${pst.toFixed(2)}</span>
+              </div>
+            )}
+            {rst > 0 && (
+              <div className="total-row">
+                <span>RST (7%):</span>
+                <span>${rst.toFixed(2)}</span>
+              </div>
+            )}
+            {hst > 0 && (
+              <div className="total-row">
+                <span>HST (13-15%):</span>
+                <span>${hst.toFixed(2)}</span>
+              </div>
+            )}
             {province === "Quebec" && (
               <div className="total-row">
                 <span>QST (9.975%):</span>
                 <span>${qst.toFixed(2)}</span>
               </div>
             )}
-            <div className="total-row">
-              <span>Shipping:</span>
-              <span>
-                {orderData.totals.shipping === 0
-                  ? "FREE"
-                  : `$${orderData.totals.shipping.toFixed(2)}`}
-              </span>
-            </div>
+            {shipping > 0 && (
+              <div className="total-row">
+                <span>Shipping:</span>
+                <span>${shipping.toFixed(2)}</span>
+              </div>
+            )}
             <div className="total-row grand-total">
               <span>Total:</span>
-              <span>${orderData.totals.total.toFixed(2)}</span>
+              <span>${total.toFixed(2)}</span>
             </div>
           </div>
         </div>
