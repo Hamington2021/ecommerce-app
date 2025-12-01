@@ -166,6 +166,35 @@ button {
   padding-bottom: 1rem;
   border-bottom: 2px solid #eee;
 }
+.products-sorting {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.quick-sort {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.quick-sort-btn {
+  background: #ecf0f1;
+  color: #2c3e50;
+  border: none;
+  padding: 0.4rem 0.6rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  transition: background 0.2s, color 0.2s;
+}
+
+.quick-sort-btn:hover {
+  background: #dfe6e9;
+}
+
+.quick-sort-btn.active {
+  background: #3498db;
+  color: #fff;
+}
 
 .products-header h2 {
   color: #2c3e50;

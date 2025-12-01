@@ -130,7 +130,31 @@ function Home() {
               {filteredProducts.length} Product
               {filteredProducts.length !== 1 ? "s" : ""}
             </h2>
-            <SortDropdown sortBy={sortBy} onSortChange={setSortBy} />
+            <div className="products-sorting">
+              <SortDropdown sortBy={sortBy} onSortChange={setSortBy} />
+              <div className="quick-sort">
+                <button
+                  type="button"
+                  className={`quick-sort-btn ${
+                    sortBy === "price-low" ? "active" : ""
+                  }`}
+                  onClick={() => setSortBy("price-low")}
+                  aria-label="Sort price low to high"
+                >
+                  Price ↑
+                </button>
+                <button
+                  type="button"
+                  className={`quick-sort-btn ${
+                    sortBy === "price-high" ? "active" : ""
+                  }`}
+                  onClick={() => setSortBy("price-high")}
+                  aria-label="Sort price high to low"
+                >
+                  Price ↓
+                </button>
+              </div>
+            </div>
           </div>
 
           <div className="product-list">
