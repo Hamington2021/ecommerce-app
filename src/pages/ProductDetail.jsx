@@ -160,8 +160,10 @@ function ProductDetail() {
 
       <section className="reviews-section">
         <h2 className="reviews-title">User Reviews</h2>
-        <ReviewList apiReviews={apiReviews} userReviews={userReviews} />
-        <ReviewForm productId={id} onReviewSubmit={handleReviewSubmit} />
+        <div className="reviews-grid">
+          <ReviewList apiReviews={apiReviews} userReviews={userReviews} />
+          <ReviewForm productId={id} onReviewSubmit={handleReviewSubmit} />
+        </div>
       </section>
 
       <Footer />
