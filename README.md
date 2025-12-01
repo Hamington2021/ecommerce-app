@@ -7,7 +7,7 @@ product reviews.
 ## 🚀 Live Demo
 
 **Vercel Deployment:**
-[https://ecommerce-app-psi-dusky.vercel.appp](https://ecommerce-app-psi-dusky.vercel.app)
+https://ecommerce-app-git-master-hamington2021s-projects.vercel.app
 
 ## 📋 Setup Instructions
 
