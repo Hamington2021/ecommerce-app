@@ -32,9 +32,14 @@ function Checkout() {
     city: "",
     state: "Quebec",
     zipCode: "",
+    paymentMethod: "credit-card",
     cardNumber: "",
     expiryDate: "",
     cvv: "",
+    paypalEmail: "",
+    bankAccountHolder: "",
+    bankAccountNumber: "",
+    bankRoutingNumber: "",
   });
   const navigate = useNavigate();
 
@@ -73,7 +78,7 @@ function Checkout() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Basic validation
+    // Basic validation for shipping info
     if (
       !formData.fullName ||
       !formData.email ||
@@ -81,12 +86,32 @@ function Checkout() {
       !formData.city ||
       !formData.state ||
       !formData.zipCode ||
-      !formData.cardNumber ||
-      !formData.expiryDate ||
-      !formData.cvv
+      !formData.paymentMethod
     ) {
-      alert("Please fill in all fields");
+      alert("Please fill in all required fields");
       return;
+    }
+
+    // Validate payment method specific fields
+    if (formData.paymentMethod === "credit-card") {
+      if (!formData.cardNumber || !formData.expiryDate || !formData.cvv) {
+        alert("Please fill in all credit card fields");
+        return;
+      }
+    } else if (formData.paymentMethod === "paypal") {
+      if (!formData.paypalEmail) {
+        alert("Please enter your PayPal email");
+        return;
+      }
+    } else if (formData.paymentMethod === "bank-transfer") {
+      if (
+        !formData.bankAccountHolder ||
+        !formData.bankAccountNumber ||
+        !formData.bankRoutingNumber
+      ) {
+        alert("Please fill in all bank transfer fields");
+        return;
+      }
     }
 
     // Store order data
@@ -102,6 +127,7 @@ function Checkout() {
         state: formData.state,
         zipCode: formData.zipCode,
       },
+      paymentMethod: formData.paymentMethod,
       totals: {
         subtotal,
         gst,
@@ -195,38 +221,127 @@ function Checkout() {
           </section>
 
           <section className="form-section">
+            <h2>Payment Method</h2>
+            <div className="payment-methods">
+              <label className="payment-option">
+                <input
+                  type="radio"
+                  name="paymentMethod"
+                  value="credit-card"
+                  checked={formData.paymentMethod === "credit-card"}
+                  onChange={handleInputChange}
+                />
+                <span className="payment-label">Credit Card</span>
+              </label>
+              <label className="payment-option">
+                <input
+                  type="radio"
+                  name="paymentMethod"
+                  value="paypal"
+                  checked={formData.paymentMethod === "paypal"}
+                  onChange={handleInputChange}
+                />
+                <span className="payment-label">PayPal</span>
+              </label>
+              <label className="payment-option">
+                <input
+                  type="radio"
+                  name="paymentMethod"
+                  value="bank-transfer"
+                  checked={formData.paymentMethod === "bank-transfer"}
+                  onChange={handleInputChange}
+                />
+                <span className="payment-label">Bank Transfer</span>
+              </label>
+            </div>
+          </section>
+
+          <section className="form-section">
             <h2>Payment Information</h2>
-            <div className="form-row">
-              <input
-                type="text"
-                name="cardNumber"
-                placeholder="Card Number"
-                value={formData.cardNumber}
-                onChange={handleInputChange}
-                maxLength="16"
-                required
-              />
-            </div>
-            <div className="form-row-group">
-              <input
-                type="text"
-                name="expiryDate"
-                placeholder="MM/YY"
-                value={formData.expiryDate}
-                onChange={handleInputChange}
-                maxLength="5"
-                required
-              />
-              <input
-                type="text"
-                name="cvv"
-                placeholder="CVV"
-                value={formData.cvv}
-                onChange={handleInputChange}
-                maxLength="3"
-                required
-              />
-            </div>
+
+            {formData.paymentMethod === "credit-card" && (
+              <>
+                <div className="form-row">
+                  <input
+                    type="text"
+                    name="cardNumber"
+                    placeholder="Card Number"
+                    value={formData.cardNumber}
+                    onChange={handleInputChange}
+                    maxLength="16"
+                    required
+                  />
+                </div>
+                <div className="form-row-group">
+                  <input
+                    type="text"
+                    name="expiryDate"
+                    placeholder="MM/YY"
+                    value={formData.expiryDate}
+                    onChange={handleInputChange}
+                    maxLength="5"
+                    required
+                  />
+                  <input
+                    type="text"
+                    name="cvv"
+                    placeholder="CVV"
+                    value={formData.cvv}
+                    onChange={handleInputChange}
+                    maxLength="3"
+                    required
+                  />
+                </div>
+              </>
+            )}
+
+            {formData.paymentMethod === "paypal" && (
+              <div className="form-row">
+                <input
+                  type="email"
+                  name="paypalEmail"
+                  placeholder="PayPal Email Address"
+                  value={formData.paypalEmail}
+                  onChange={handleInputChange}
+                  required
+                />
+              </div>
+            )}
+
+            {formData.paymentMethod === "bank-transfer" && (
+              <>
+                <div className="form-row">
+                  <input
+                    type="text"
+                    name="bankAccountHolder"
+                    placeholder="Account Holder Name"
+                    value={formData.bankAccountHolder}
+                    onChange={handleInputChange}
+                    required
+                  />
+                </div>
+                <div className="form-row">
+                  <input
+                    type="text"
+                    name="bankAccountNumber"
+                    placeholder="Account Number"
+                    value={formData.bankAccountNumber}
+                    onChange={handleInputChange}
+                    required
+                  />
+                </div>
+                <div className="form-row">
+                  <input
+                    type="text"
+                    name="bankRoutingNumber"
+                    placeholder="Routing Number"
+                    value={formData.bankRoutingNumber}
+                    onChange={handleInputChange}
+                    required
+                  />
+                </div>
+              </>
+            )}
           </section>
 
           <button type="submit" className="place-order-btn">
