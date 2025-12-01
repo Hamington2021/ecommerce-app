@@ -19,6 +19,22 @@ function OrderConfirmation() {
     return <div className="loading">Loading...</div>;
   }
 
+  // Calculate GST and QST if not present in orderData.totals
+  const subtotal = orderData.totals.subtotal;
+  const province = orderData.customerInfo.state;
+  const GST_RATE = 0.05;
+  const QST_RATE = 0.09975;
+  const gst =
+    orderData.totals.gst !== undefined
+      ? orderData.totals.gst
+      : subtotal * GST_RATE;
+  const qst =
+    province === "Quebec"
+      ? orderData.totals.qst !== undefined
+        ? orderData.totals.qst
+        : subtotal * QST_RATE
+      : 0;
+
   return (
     <div className="order-confirmation-page">
       <div className="confirmation-content">
@@ -79,9 +95,15 @@ function OrderConfirmation() {
               <span>${orderData.totals.subtotal.toFixed(2)}</span>
             </div>
             <div className="total-row">
-              <span>Tax:</span>
-              <span>${orderData.totals.tax.toFixed(2)}</span>
+              <span>GST (5%):</span>
+              <span>${gst.toFixed(2)}</span>
             </div>
+            {province === "Quebec" && (
+              <div className="total-row">
+                <span>QST (9.975%):</span>
+                <span>${qst.toFixed(2)}</span>
+              </div>
+            )}
             <div className="total-row">
               <span>Shipping:</span>
               <span>
