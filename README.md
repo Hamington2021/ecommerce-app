@@ -4,7 +4,60 @@ A fully-featured e-commerce application built with React, featuring product
 listings, search/filter/sort functionality, shopping cart, checkout process, and
 product reviews.
 
-## Features
+## 🚀 Live Demo
+
+**Vercel Deployment:**
+[https://ecommerce-app-psi-dusky.vercel.appp](https://ecommerce-app-psi-dusky.vercel.app)
+
+## 📋 Setup Instructions
+
+### Prerequisites
+
+- Node.js (v14 or higher)
+- npm or yarn
+
+### Installation
+
+1. **Clone the repository:**
+
+   ```bash
+   git clone https://github.com/Hamington2021/ecommerce-app.git
+   cd ecommerce-app
+   ```
+
+2. **Install dependencies:**
+
+   ```bash
+   npm install
+   ```
+
+3. **Start the development server:**
+
+   ```bash
+   npm start
+   ```
+
+4. **Open your browser:** Navigate to
+   [http://localhost:3000](http://localhost:3000)
+
+### Build for Production
+
+```bash
+npm run build
+```
+
+This creates an optimized production build in the `build` folder.
+
+### Deploy to Vercel
+
+```bash
+npm install -g vercel
+vercel
+```
+
+Follow the prompts to deploy your application.
+
+## ✨ Features
 
 ### 1. Product Listings
 
@@ -118,13 +171,46 @@ Builds the app for production to the `build` folder.
 - **LocalStorage API** - Client-side data persistence
 - **CSS3** - Styling with responsive design
 
-## Project Structure
+## 👥 Team Members
 
-- `src/components/` - Reusable React components
-- `src/pages/` - Page-level components
-- `src/services/` - API and localStorage utilities
-- `src/styles/` - CSS files (main + responsive)
+Serena Shushack Pascale Fontaine
 
-## License
+## 📁 Project Structure
 
-MIT License
+```
+ecommerce-app/
+├── public/
+│   ├── index.html
+│   ├── manifest.json
+│   └── robots.txt
+├── src/
+│   ├── components/      # Reusable React components
+│   │   ├── CartItem.jsx
+│   │   ├── CheckoutSummary.jsx
+│   │   ├── FilterSidebar.jsx
+│   │   ├── Footer.jsx
+│   │   ├── ProductCard.jsx
+│   │   ├── RatingStars.jsx
+│   │   ├── ReviewForm.jsx
+│   │   ├── ReviewList.jsx
+│   │   ├── SearchBar.jsx
+│   │   └── SortDropdown.jsx
+│   ├── pages/           # Page-level components
+│   │   ├── Cart.jsx
+│   │   ├── Checkout.jsx
+│   │   ├── Home.jsx
+│   │   ├── OrderConfirmation.jsx
+│   │   └── ProductDetail.jsx
+│   ├── services/        # API and localStorage utilities
+│   │   ├── api.js
+│   │   └── localStorage.js
+│   ├── styles/          # CSS files
+│   │   ├── main.css
+│   │   ├── responsive.css
+│   │   └── ProductDetail.css
+│   ├── App.jsx
+│   ├── index.jsx
+│   └── index.css
+├── package.json
+└── README.md
+```
