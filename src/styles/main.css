@@ -166,6 +166,35 @@ button {
   padding-bottom: 1rem;
   border-bottom: 2px solid #eee;
 }
+.products-sorting {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.quick-sort {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.quick-sort-btn {
+  background: #ecf0f1;
+  color: #2c3e50;
+  border: none;
+  padding: 0.4rem 0.6rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  transition: background 0.2s, color 0.2s;
+}
+
+.quick-sort-btn:hover {
+  background: #dfe6e9;
+}
+
+.quick-sort-btn.active {
+  background: #3498db;
+  color: #fff;
+}
 
 .products-header h2 {
   color: #2c3e50;
@@ -505,7 +534,7 @@ button {
   max-width: 420px;
   background: #fff;
   border-radius: 1.2rem;
-  box-shadow: 0 2px 16px rgba(0,0,0,0.07);
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.07);
   margin-bottom: 1.2rem;
   overflow: hidden;
   display: flex;
@@ -531,7 +560,7 @@ button {
   padding: 0.4rem 1rem;
   border-radius: 1rem;
   font-size: 1rem;
-  box-shadow: 0 2px 8px rgba(255,82,82,0.12);
+  box-shadow: 0 2px 8px rgba(255, 82, 82, 0.12);
 }
 
 .thumbnail-list {
@@ -554,7 +583,7 @@ button {
 .thumbnail.active,
 .thumbnail:hover {
   border: 2px solid #0070f3;
-  box-shadow: 0 2px 8px rgba(0,112,243,0.08);
+  box-shadow: 0 2px 8px rgba(0, 112, 243, 0.08);
 }
 
 .product-info-section {
@@ -562,7 +591,7 @@ button {
   max-width: 540px;
   background: #fff;
   border-radius: 1.2rem;
-  box-shadow: 0 2px 16px rgba(0,0,0,0.07);
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.07);
   padding: 2rem 2.5rem;
   display: flex;
   flex-direction: column;
@@ -668,7 +697,7 @@ button {
   margin-top: 1rem;
   cursor: pointer;
   transition: background 0.2s;
-  box-shadow: 0 2px 8px rgba(0,112,243,0.08);
+  box-shadow: 0 2px 8px rgba(0, 112, 243, 0.08);
 }
 .add-to-cart-btn-large:disabled {
   background: #bdbdbd;
@@ -690,7 +719,7 @@ button {
   background: #fff;
   margin: 2rem auto 0 auto;
   border-radius: 1.2rem;
-  box-shadow: 0 2px 16px rgba(0,0,0,0.07);
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.07);
   max-width: 1000px;
   padding: 2rem 2.5rem 2.5rem 2.5rem;
 }
@@ -742,9 +771,9 @@ button {
 }
 
 /* Reviews Section */
-.reviews-section {
+.reviews-grid {
   max-width: 1200px;
-  margin: 2rem auto;
+  margin: 0 auto;
   padding: 0 2rem;
   display: grid;
   grid-template-columns: 1fr 1fr;
